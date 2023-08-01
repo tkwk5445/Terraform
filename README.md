@@ -1,2 +1,1 @@
-# Terraform
-Terraform Code for project
+# Terraform Code for project
