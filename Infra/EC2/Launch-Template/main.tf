@@ -10,7 +10,7 @@ resource "aws_launch_template" "project03-launch-template" {
   }
 
   tags = {
-    name = "project03-codedeploy-launch-template"
+    Name = "project03-codedeploy-launch-template"
   }
 
   lifecycle {
