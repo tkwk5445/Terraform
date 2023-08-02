@@ -1,21 +1,21 @@
-data "terraform_remote_state" "project03_sg" {
-  
+data "terraform_remote_state" "project03_SG" {
+
   backend = "s3"
   config = {
     bucket = "project03-terraform-state"
-   
-    key    = "project03/sg/terraform.tfstate"
+
+    key    = "project03/Infra/Network/SG/terraform.tfstate"
     region = "ap-northeast-2"
   }
 }
 
-data "terraform_remote_state" "project03_vpc" {
-  
+data "terraform_remote_state" "project03_VPC" {
+
   backend = "s3"
   config = {
     bucket = "project03-terraform-state"
 
-    key    = "project03/vpc/terraform.tfstate"
+    key    = "project03/Infra/Network/VPC/terraform.tfstate"
     region = "ap-northeast-2"
   }
 }
