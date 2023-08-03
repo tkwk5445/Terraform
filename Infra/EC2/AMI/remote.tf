@@ -4,7 +4,7 @@ data "terraform_remote_state" "project03_target" {
   config = {
     bucket = "project03-terraform-state"
 
-    key    = "project03/Infra/EC2/Target/terraform.tfstate"
+    key    = "project03/Infra/EC2/Instance/Target/terraform.tfstate"
     region = "ap-northeast-2"
   }
 }

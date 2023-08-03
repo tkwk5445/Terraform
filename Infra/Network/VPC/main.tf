@@ -60,6 +60,9 @@ resource "aws_internet_gateway" "project03_igw" {
 resource "aws_eip" "project03_eip" {
   vpc        = true
   depends_on = ["aws_internet_gateway.project03_igw"]
+  tags = {
+    Name = "project03_eip"
+  }
   lifecycle {
     create_before_destroy = true
   }
