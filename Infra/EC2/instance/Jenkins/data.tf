@@ -13,3 +13,7 @@ data "aws_ami" "ubuntu" {
 
   owners = ["099720109477"]
 }
+
+data "aws_iam_role" "target" {
+  name = "project03-codedeploy-ec2-role"
+}
