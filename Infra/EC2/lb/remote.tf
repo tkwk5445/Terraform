@@ -29,3 +29,13 @@ data "terraform_remote_state" "project03-jenkins" {
   }
 }
 
+data "terraform_remote_state" "project03-GROUP" {
+
+  backend = "s3"
+  config = {
+    bucket = "project03-terraform-state"
+
+    key    = "project03/Infra/EC2/ASG/terraform.tfstate"
+    region = "ap-northeast-2"
+  }
+}

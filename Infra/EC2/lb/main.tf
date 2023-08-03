@@ -1,15 +1,9 @@
-provider "aws" {
-  region = "ap-northeast-2"
-}
-
-# Create Target group
+# Create Target group 
 resource "aws_lb_target_group" "project03-target-group" {
   name     = "project03-target-group"
-  port     = 80
+  port     = 8080
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.project03_VPC.outputs.vpc_id
-
-  
   health_check {
     path                = "/"
     protocol            = "HTTP"
@@ -20,12 +14,21 @@ resource "aws_lb_target_group" "project03-target-group" {
     unhealthy_threshold = 2
   }
 }
-# target to Jenkins ec2 
+
+# Target instances for Jenkins (Jenkins EC2 instance)
 resource "aws_lb_target_group_attachment" "ALB_Jenkins" {
   target_group_arn = aws_lb_target_group.project03-target-group.arn
   target_id        = data.terraform_remote_state.project03-jenkins.outputs.jenkins-EC2
   port             = 8080
 }
+
+/* # Target instances for Auto Scaling Group (ASG instances)
+resource "aws_lb_target_group_attachment" "ALB_ASG" {
+  for_each         = toset(data.terraform_remote_state.project03-GROUP.outputs.instance_ids)
+  target_group_arn = aws_lb_target_group.project03-target-group.arn
+  target_id        = each.key
+  port             = 8080
+} */
 # Create loadbalancer
 resource "aws_lb" "project03-lb" {
   name               = "project03-lb"
@@ -36,7 +39,6 @@ resource "aws_lb" "project03-lb" {
   ]
   security_groups = [data.terraform_remote_state.project03_SG.outputs.project03-web]
 }
-
 
 # ALB listener
 resource "aws_lb_listener" "http" {
@@ -61,16 +63,14 @@ resource "aws_lb_listener" "https" {
     target_group_arn = aws_lb_target_group.project03-target-group.arn
   }
 }
-
-# ALB listener rule
-resource "aws_lb_listener_rule" "asg" {
+# ALB listener rule for "/jenkins*"
+resource "aws_lb_listener_rule" "jenkins" {
   listener_arn = aws_lb_listener.http.arn
-
-  priority = 100
+  priority     = 100
 
   condition {
     path_pattern {
-      values = ["*"]
+      values = ["/jenkins*"]
     }
   }
 
@@ -80,4 +80,19 @@ resource "aws_lb_listener_rule" "asg" {
   }
 }
 
+# ALB listener rule for default path
+resource "aws_lb_listener_rule" "default" {
+  listener_arn = aws_lb_listener.http.arn
+  priority     = 99
 
+  condition {
+    path_pattern {
+      values = ["/*"]
+    }
+  }
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.project03-target-group.arn
+  }
+}
