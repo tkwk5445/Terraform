@@ -80,7 +80,7 @@ resource "aws_lb_listener" "https" {
   }
 } */
 
-# ALB listener rule for default path
+/* # ALB listener rule for default path
 resource "aws_lb_listener_rule" "default" {
   listener_arn = aws_lb_listener.http.arn
   priority     = 99
@@ -96,3 +96,4 @@ resource "aws_lb_listener_rule" "default" {
     target_group_arn = aws_lb_target_group.project03-target-group.arn
   }
 }
+ */
