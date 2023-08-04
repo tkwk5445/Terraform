@@ -64,7 +64,7 @@ resource "aws_lb_listener" "https" {
   }
 }
 # ALB listener rule for "/jenkins*"
-resource "aws_lb_listener_rule" "jenkins" {
+/* resource "aws_lb_listener_rule" "jenkins" {
   listener_arn = aws_lb_listener.http.arn
   priority     = 100
 
@@ -78,7 +78,7 @@ resource "aws_lb_listener_rule" "jenkins" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.project03-target-group.arn
   }
-}
+} */
 
 # ALB listener rule for default path
 resource "aws_lb_listener_rule" "default" {
