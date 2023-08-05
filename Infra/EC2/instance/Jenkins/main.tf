@@ -6,8 +6,7 @@ resource "aws_instance" "project03-jenkins-ec2" {
 
   vpc_security_group_ids = [data.terraform_remote_state.project03_SG.outputs["project03-ssh"],
   data.terraform_remote_state.project03_SG.outputs["project03-web"]]
-  iam_instance_profile = data.aws_iam_role.target.id
-
+  iam_instance_profile        = data.aws_iam_role.target.id
   subnet_id                   = data.terraform_remote_state.project03_VPC.outputs.private_subnet2a
   availability_zone           = "ap-northeast-2a"
   associate_public_ip_address = false

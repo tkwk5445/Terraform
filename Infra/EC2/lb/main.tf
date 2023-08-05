@@ -1,6 +1,6 @@
-# Create Target group 
-resource "aws_lb_target_group" "project03-target-group" {
-  name     = "project03-target-group"
+# Create Target group (Jenkins)
+resource "aws_lb_target_group" "project03-target-group-jenkins" {
+  name     = "project03-target-group-jenkins"
   port     = 8080
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.project03_VPC.outputs.vpc_id
@@ -17,10 +17,28 @@ resource "aws_lb_target_group" "project03-target-group" {
 
 # Target instances for Jenkins (Jenkins EC2 instance)
 resource "aws_lb_target_group_attachment" "ALB_Jenkins" {
-  target_group_arn = aws_lb_target_group.project03-target-group.arn
+  target_group_arn = aws_lb_target_group.project03-target-group-jenkins.arn
   target_id        = data.terraform_remote_state.project03-jenkins.outputs.jenkins-EC2
   port             = 8080
 }
+
+# Create Target group (autoscaling group)
+resource "aws_lb_target_group" "project03-target-group-petclinic" {
+  name     = "project03-target-group-petclinic"
+  port     = 8080
+  protocol = "HTTP"
+  vpc_id   = data.terraform_remote_state.project03_VPC.outputs.vpc_id
+  health_check {
+    path                = "/"
+    protocol            = "HTTP"
+    matcher             = "200"
+    interval            = 15
+    timeout             = 3
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+  }
+}
+
 
 /* # Target instances for Auto Scaling Group (ASG instances)
 resource "aws_lb_target_group_attachment" "ALB_ASG" {
@@ -29,6 +47,8 @@ resource "aws_lb_target_group_attachment" "ALB_ASG" {
   target_id        = each.key
   port             = 8080
 } */
+
+
 # Create loadbalancer
 resource "aws_lb" "project03-lb" {
   name               = "project03-lb"
@@ -48,9 +68,10 @@ resource "aws_lb_listener" "http" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.project03-target-group.arn
+    target_group_arn = aws_lb_target_group.project03-target-group-petclinic.arn
   }
 }
+
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.project03-lb.arn
   port              = 443
@@ -60,7 +81,18 @@ resource "aws_lb_listener" "https" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.project03-target-group.arn
+    target_group_arn = aws_lb_target_group.project03-target-group-petclinic.arn
+  }
+}
+
+resource "aws_lb_listener" "web" {
+  load_balancer_arn = aws_lb.project03-lb.arn
+  port              = 8080
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.project03-target-group-jenkins.arn
   }
 }
 # ALB listener rule for "/jenkins*"

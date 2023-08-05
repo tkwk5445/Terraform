@@ -18,3 +18,11 @@ output "private_subnet2a" {
 output "private_subnet2c" {
   value = aws_subnet.project03_subnet_private1_ap_northeast_2c.id
 }
+
+output "eip_id" {
+  value = aws_eip.project03_eip.id
+}
+
+output "eip_ip" {
+  value = aws_eip.project03_eip.public_ip
+}
