@@ -1,4 +1,4 @@
-# Create Target group (Jenkins)
+# Target group ( jenkins )
 resource "aws_lb_target_group" "project03-target-group-jenkins" {
   name     = "project03-target-group-jenkins"
   port     = 8080
@@ -15,16 +15,16 @@ resource "aws_lb_target_group" "project03-target-group-jenkins" {
   }
 }
 
-# Target instances for Jenkins (Jenkins EC2 instance)
+# 대상 등록 ( jenkins instance )
 resource "aws_lb_target_group_attachment" "ALB_Jenkins" {
   target_group_arn = aws_lb_target_group.project03-target-group-jenkins.arn
-  target_id        = data.terraform_remote_state.project03-jenkins.outputs.jenkins-EC2
+  target_id        = data.terraform_remote_state.project03_jenkins.outputs.jenkins-EC2
   port             = 8080
 }
 
-# Create Target group (autoscaling group)
+# Target group ( petclinic ) / 대상 등록은 autoscaling에서 적용
 resource "aws_lb_target_group" "project03-target-group-petclinic" {
-  name     = "project03-target-group-petclinic"
+  name     = "project03-target-group"
   port     = 8080
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.project03_VPC.outputs.vpc_id
@@ -49,7 +49,7 @@ resource "aws_lb_target_group_attachment" "ALB_ASG" {
 } */
 
 
-# Create loadbalancer
+# pplication loadbalancer
 resource "aws_lb" "project03-lb" {
   name               = "project03-lb"
   load_balancer_type = "application"

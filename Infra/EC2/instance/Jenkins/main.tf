@@ -4,8 +4,12 @@ resource "aws_instance" "project03-jenkins-ec2" {
   instance_type = "t3.large"
   key_name      = "project03-key"
 
-  vpc_security_group_ids = [data.terraform_remote_state.project03_SG.outputs["project03-ssh"],
-  data.terraform_remote_state.project03_SG.outputs["project03-web"]]
+  # Security group ( ssh, web )
+  vpc_security_group_ids = [
+    data.terraform_remote_state.project03_SG.outputs["project03-ssh"],
+    data.terraform_remote_state.project03_SG.outputs["project03-web"],
+  ]
+  # IAM
   iam_instance_profile        = data.aws_iam_role.target.id
   subnet_id                   = data.terraform_remote_state.project03_VPC.outputs.private_subnet2a
   availability_zone           = "ap-northeast-2a"

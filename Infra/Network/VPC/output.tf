@@ -2,21 +2,20 @@ output "vpc_id" {
   value = aws_vpc.project03_vpc.id
 }
 
-# output "public_subnet_arns" {
-#    value = aws_vpc.project03_public_subnet_arns
-# }
-
 output "public_subnet2a" {
-  value = aws_subnet.project03_subnet_public1_ap_northeast_2a.id
+  value = aws_subnet.public[0].id
 }
+
 output "public_subnet2c" {
-  value = aws_subnet.project03_subnet_public1_ap_northeast_2c.id
+  value = aws_subnet.public[1].id
 }
+
 output "private_subnet2a" {
-  value = aws_subnet.project03_subnet_private1_ap_northeast_2a.id
+  value = aws_subnet.private[0].id
 }
+
 output "private_subnet2c" {
-  value = aws_subnet.project03_subnet_private1_ap_northeast_2c.id
+  value = aws_subnet.private[1].id
 }
 
 output "eip_id" {

@@ -4,7 +4,7 @@ resource "aws_security_group" "project03-WEB" {
   description = "security group for web server"
   vpc_id      = data.terraform_remote_state.project03_vpc.outputs.vpc_id
 
-  #인바운드 HTTP, HTTPS, WEB 트래픽 허용
+  #인바운드 80, 443, 8080 허용
   ingress {
     from_port   = 80
     to_port     = 80
@@ -25,6 +25,7 @@ resource "aws_security_group" "project03-WEB" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
   #모든 아웃바운드 트래픽 허용
   egress {
     from_port   = 0

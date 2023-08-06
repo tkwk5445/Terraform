@@ -1,41 +1,35 @@
 data "terraform_remote_state" "project03_VPC" {
   backend = "s3"
   config = {
-    bucket = "project03-terraform-state"
-    key    = "project03/Infra/Network/VPC/terraform.tfstate"
-    region = "ap-northeast-2"
+    bucket = var.remote_state_bucket
+    key    = var.remote_state_vpc
+    region = var.remote_state_region
   }
 }
 
 data "terraform_remote_state" "project03_SG" {
-
   backend = "s3"
   config = {
-    bucket = "project03-terraform-state"
-
-    key    = "project03/Infra/Network/SG/terraform.tfstate"
-    region = "ap-northeast-2"
+    bucket = var.remote_state_bucket
+    key    = var.remote_state_sg
+    region = var.remote_state_region
   }
 }
 
-data "terraform_remote_state" "project03-jenkins" {
-
+data "terraform_remote_state" "project03_jenkins" {
   backend = "s3"
   config = {
-    bucket = "project03-terraform-state"
-
-    key    = "project03/Infra/EC2/Instance/Jenkins/terraform.tfstate"
-    region = "ap-northeast-2"
+    bucket = var.remote_state_bucket
+    key    = var.remote_state_jenkins_instance
+    region = var.remote_state_region
   }
 }
 
-data "terraform_remote_state" "project03-GROUP" {
-
+data "terraform_remote_state" "project03_GROUP" {
   backend = "s3"
   config = {
-    bucket = "project03-terraform-state"
-
-    key    = "project03/Infra/EC2/ASG/terraform.tfstate"
-    region = "ap-northeast-2"
+    bucket = var.remote_state_bucket
+    key    = var.remote_state_asg
+    region = var.remote_state_region
   }
 }
