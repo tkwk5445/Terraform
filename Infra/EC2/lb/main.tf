@@ -5,7 +5,7 @@ resource "aws_lb_target_group" "project03-target-group-jenkins" {
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.project03_VPC.outputs.vpc_id
   health_check {
-    path                = "/"
+    path                = "/login?from=%2F"
     protocol            = "HTTP"
     matcher             = "200"
     interval            = 15
@@ -39,17 +39,7 @@ resource "aws_lb_target_group" "project03-target-group-petclinic" {
   }
 }
 
-
-/* # Target instances for Auto Scaling Group (ASG instances)
-resource "aws_lb_target_group_attachment" "ALB_ASG" {
-  for_each         = toset(data.terraform_remote_state.project03-GROUP.outputs.instance_ids)
-  target_group_arn = aws_lb_target_group.project03-target-group.arn
-  target_id        = each.key
-  port             = 8080
-} */
-
-
-# pplication loadbalancer
+# Application loadbalancer
 resource "aws_lb" "project03-lb" {
   name               = "project03-lb"
   load_balancer_type = "application"
@@ -95,37 +85,45 @@ resource "aws_lb_listener" "web" {
     target_group_arn = aws_lb_target_group.project03-target-group-jenkins.arn
   }
 }
-# ALB listener rule for "/jenkins*"
-/* resource "aws_lb_listener_rule" "jenkins" {
+
+# http listener rule for "/petclinic*"
+resource "aws_lb_listener_rule" "petclinic_rule1" {
   listener_arn = aws_lb_listener.http.arn
   priority     = 100
 
   condition {
     path_pattern {
-      values = ["/jenkins*"]
+      values = ["/petclinic*"]
     }
   }
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.project03-target-group.arn
+    target_group_arn = aws_lb_target_group.project03-target-group-petclinic.arn
   }
-} */
 
-/* # ALB listener rule for default path
-resource "aws_lb_listener_rule" "default" {
-  listener_arn = aws_lb_listener.http.arn
-  priority     = 99
+  tags = {
+    Name = "petclinic_rule"
+  }
+}
+
+# https listener rule for "/petclinic*"
+resource "aws_lb_listener_rule" "petclinic_rule2" {
+  listener_arn = aws_lb_listener.https.arn
+  priority     = 100
 
   condition {
     path_pattern {
-      values = ["/*"]
+      values = ["/petclinic*"]
     }
   }
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.project03-target-group.arn
+    target_group_arn = aws_lb_target_group.project03-target-group-petclinic.arn
+  }
+
+  tags = {
+    Name = "petclinic_rule"
   }
 }
- */

@@ -11,21 +11,21 @@ output "load_balancer_arn" {
 # Target
 output "target_group_petclinic_arn" {
   value       = aws_lb_target_group.project03-target-group-petclinic.arn
-  description = "The arn of the petclinic target group arn"
+  description = "The arn of the petclinic target group"
 }
 output "target_group_petclinic_id" {
   value       = aws_lb_target_group.project03-target-group-petclinic.id
-  description = "The id of the petclinic target group id"
+  description = "The id of the petclinic target group"
 }
 
 # Jenkins
 output "target_group_jenkins_arn" {
   value       = aws_lb_target_group.project03-target-group-jenkins.arn
-  description = "The arn of the jenkins target group arn"
+  description = "The arn of the jenkins target group"
 }
 output "target_group_jenkins_id" {
   value       = aws_lb_target_group.project03-target-group-jenkins.id
-  description = "The id of the jenkins target group id"
+  description = "The id of the jenkins target group"
 }
 
 
