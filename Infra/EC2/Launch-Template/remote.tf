@@ -15,7 +15,6 @@ data "terraform_remote_state" "project03_VPC" {
     region = var.remote_state_region
   }
 }
-
 data "terraform_remote_state" "project03_AMI" {
   backend = "s3"
   config = {

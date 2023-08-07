@@ -21,7 +21,6 @@ resource "aws_instance" "project03-jenkins-ec2" {
               sudo chmod u+x install-docker.sh
               sudo ./install-docker.sh && sudo ./install-docker-compose.sh && docker-compose up -d --build
               EOF
-
   tags = {
     Name = "project03-jenkins-ec2"
   }

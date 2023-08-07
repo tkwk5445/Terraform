@@ -14,7 +14,6 @@ variable "private_subnet" {
   type        = list(string)
   default     = ["10.3.64.0/20", "10.3.80.0/20"]
 }
-
 variable "azs" {
   description = "The available zone of ap-norheast-2"
   type        = list(string)

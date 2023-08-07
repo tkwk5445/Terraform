@@ -22,7 +22,6 @@ variable "key" {
   description = "The key name of project03-key"
   default     = "project03-key"
 }
-
 variable "azs" {
   description = "The available zone of ap-norheast-2"
   type        = list(string)
