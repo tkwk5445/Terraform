@@ -86,7 +86,7 @@ resource "aws_lb_listener" "web" {
   }
 }
 
-# http listener rule for "/petclinic*"
+# http listener rule for /petclinic*
 resource "aws_lb_listener_rule" "petclinic_rule1" {
   listener_arn = aws_lb_listener.http.arn
   priority     = 100
@@ -107,7 +107,7 @@ resource "aws_lb_listener_rule" "petclinic_rule1" {
   }
 }
 
-# https listener rule for "/petclinic*"
+# https listener rule for /petclinic*
 resource "aws_lb_listener_rule" "petclinic_rule2" {
   listener_arn = aws_lb_listener.https.arn
   priority     = 100
