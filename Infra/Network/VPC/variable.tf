@@ -1,19 +1,23 @@
 variable "vpc_cidr" {
-  default = "10.3.0.0/16"
+  description = "The cidr of vpc"
+  default     = "10.3.0.0/16"
 }
 
 variable "public_subnet" {
-  type    = list(string)
-  default = ["10.3.0.0/20", "10.3.16.0/20"]
+  description = "The public subnet of vpc"
+  type        = list(string)
+  default     = ["10.3.0.0/20", "10.3.16.0/20"]
 }
 
 variable "private_subnet" {
-  type    = list(string)
-  default = ["10.3.64.0/20", "10.3.80.0/20"]
+  description = "The private subnet of vpc"
+  type        = list(string)
+  default     = ["10.3.64.0/20", "10.3.80.0/20"]
 }
 
 variable "azs" {
-  type    = list(string)
-  default = ["ap-northeast-2a", "ap-northeast-2c"]
+  description = "The available zone of ap-norheast-2"
+  type        = list(string)
+  default     = ["ap-northeast-2a", "ap-northeast-2c"]
 }
 

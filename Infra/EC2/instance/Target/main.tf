@@ -1,7 +1,7 @@
 resource "aws_instance" "project03-target-ec2" {
   ami           = data.aws_ami.ubuntu.image_id
   instance_type = "t2.micro"
-  key_name      = "project03-key"
+  key_name      = var.key
 
   # Security group ( ssh, web )
   vpc_security_group_ids = [
@@ -11,7 +11,7 @@ resource "aws_instance" "project03-target-ec2" {
   # IAM
   iam_instance_profile        = data.aws_iam_role.target.id
   subnet_id                   = data.terraform_remote_state.project03_VPC.outputs.private_subnet2a
-  availability_zone           = "ap-northeast-2a"
+  availability_zone           = var.azs[0]
   associate_public_ip_address = false
   user_data                   = <<-EOF
               #!/bin/bash

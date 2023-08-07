@@ -22,3 +22,8 @@ variable "remote_state_region" {
   description = "The AWS region where the S3 bucket storing the remote state is located."
   default     = "ap-northeast-2"
 }
+
+variable "key" {
+  description = "The key name of project03-key"
+  default     = "project03-key"
+}

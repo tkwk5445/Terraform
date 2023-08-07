@@ -24,3 +24,4 @@ data "terraform_remote_state" "project03_AMI" {
     region = var.remote_state_region
   }
 }
+

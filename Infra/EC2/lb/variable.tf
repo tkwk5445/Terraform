@@ -26,3 +26,8 @@ variable "remote_state_region" {
   description = "The AWS region where the S3 bucket storing the remote state is located."
   default     = "ap-northeast-2"
 }
+
+variable "https_listener_certificate_arn" {
+  description = "The ARN of the SSL/TLS certificate for the HTTPS listener."
+  default     = "arn:aws:acm:ap-northeast-2:257307634175:certificate/8238361a-128b-464c-81fe-c4108d9e5ab2"
+}
