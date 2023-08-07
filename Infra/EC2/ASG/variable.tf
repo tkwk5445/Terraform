@@ -13,7 +13,7 @@ variable "remote_state_vpc" {
   default     = "Infra/Network/VPC/terraform.tfstate"
 }
 
-variable "remote_state_launch-template" {
+variable "remote_state_launchT" {
   description = "The key of the remote state file for the Launch Template in the S3 bucket."
   default     = "Infra/EC2/Launch-template/terraform.tfstate"
 }

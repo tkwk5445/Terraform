@@ -1,5 +1,4 @@
 data "terraform_remote_state" "project03_target" {
-
   backend = "s3"
   config = {
     bucket = var.remote_state_bucket

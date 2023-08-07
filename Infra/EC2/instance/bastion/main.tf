@@ -6,7 +6,6 @@ resource "aws_instance" "project03-Bastion-ec2" {
   subnet_id                   = data.terraform_remote_state.project03_VPC.outputs.public_subnet2a
   availability_zone           = var.azs[0] # ap-northeast-2a 
   associate_public_ip_address = true
-
   tags = {
     Name = "project03-Bastion-ec2"
   }

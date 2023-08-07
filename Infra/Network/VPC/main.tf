@@ -61,14 +61,13 @@ resource "aws_eip" "project03_eip" {
 
 # NAT Gateway 리소스 정의
 resource "aws_nat_gateway" "public_nat" {
-  count = length(var.azs)
 
   allocation_id = aws_eip.project03_eip.id
-  subnet_id     = aws_subnet.public[count.index].id
+  subnet_id     = aws_subnet.public[0].id
   depends_on    = [aws_internet_gateway.project03_igw]
 
   tags = {
-    Name = "project03_nat_public${count.index + 1}_${var.azs[count.index]}"
+    Name = "project03_nat_public1_ap_northeast_2a"
   }
 }
 
@@ -118,5 +117,5 @@ resource "aws_route" "private_nat" {
 
   route_table_id         = aws_route_table.private_rt[count.index].id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = aws_nat_gateway.public_nat[count.index].id
+  nat_gateway_id         = aws_nat_gateway.public_nat.id
 }

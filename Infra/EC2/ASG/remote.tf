@@ -16,11 +16,11 @@ data "terraform_remote_state" "project03_VPC" {
   }
 }
 
-data "terraform_remote_state" "project03_launch-template" {
+data "terraform_remote_state" "project03_launchT" {
   backend = "s3"
   config = {
     bucket = var.remote_state_bucket
-    key    = var.remote_state_launch-template
+    key    = var.remote_state_launchT
     region = var.remote_state_region
   }
 }

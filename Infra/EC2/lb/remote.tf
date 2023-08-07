@@ -24,12 +24,3 @@ data "terraform_remote_state" "project03_jenkins" {
     region = var.remote_state_region
   }
 }
-
-data "terraform_remote_state" "project03_GROUP" {
-  backend = "s3"
-  config = {
-    bucket = var.remote_state_bucket
-    key    = var.remote_state_asg
-    region = var.remote_state_region
-  }
-}

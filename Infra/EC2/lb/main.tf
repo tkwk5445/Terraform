@@ -5,7 +5,7 @@ resource "aws_lb_target_group" "project03-target-group-jenkins" {
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.project03_VPC.outputs.vpc_id
   health_check {
-    path                = "/login?from=%2F"
+    path                = "/"
     protocol            = "HTTP"
     matcher             = "200"
     interval            = 15
