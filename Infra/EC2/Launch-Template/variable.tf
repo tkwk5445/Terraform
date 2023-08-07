@@ -5,17 +5,17 @@ variable "remote_state_bucket" {
 
 variable "remote_state_sg" {
   description = "The key of the remote state file for the security group in the S3 bucket."
-  default     = "project03/Infra/Network/SG/terraform.tfstate"
+  default     = "Infra/Network/SG/terraform.tfstate"
 }
 
 variable "remote_state_vpc" {
   description = "The key of the remote state file for the VPC in the S3 bucket."
-  default     = "project03/Infra/Network/VPC/terraform.tfstate"
+  default     = "Infra/Network/VPC/terraform.tfstate"
 }
 
 variable "remote_state_ami" {
   description = "The key of the remote state file for the AMI in the S3 bucket."
-  default     = "project03/AMI/Target/terraform.tfstate"
+  default     = "Infra/EC2/AMI/Target/terraform.tfstate"
 }
 
 variable "remote_state_region" {

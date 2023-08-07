@@ -5,7 +5,7 @@ variable "remote_state_bucket" {
 
 variable "remote_state_target_instance" {
   description = "The key of the remote state file for the target instane in the S3 bucket."
-  default     = "project03/Infra/EC2/Instance/Target/terraform.tfstate"
+  default     = "Infra/EC2/Instance/Target/terraform.tfstate"
 }
 
 variable "remote_state_region" {

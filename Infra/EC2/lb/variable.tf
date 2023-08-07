@@ -15,12 +15,12 @@ variable "remote_state_vpc" {
 
 variable "remote_state_jenkins_instance" {
   description = "The key of the remote state file for Jenkins instance in the S3 bucket."
-  default     = "project03/Infra/EC2/Instance/Jenkins/terraform.tfstate"
+  default     = "Infra/EC2/Instance/Jenkins/terraform.tfstate"
 }
 
 variable "remote_state_asg" {
   description = "The key of the remote state file for the Auto Scaling Group in the S3 bucket."
-  default     = "project03/Infra/EC2/ASG/terraform.tfstate"
+  default     = "Infra/EC2/ASG/terraform.tfstate"
 }
 variable "remote_state_region" {
   description = "The AWS region where the S3 bucket storing the remote state is located."
