@@ -17,6 +17,7 @@ resource "aws_instance" "project03-target-ec2" {
               #!/bin/bash
               sudo apt update
               sudo apt install -y docker.io git default-jre ruby wget unzip
+              sudo apt install -y stress
 
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
               unzip awscliv2.zip

@@ -11,7 +11,7 @@ terraform {
     }
   }
 }
-# S3 버킷 생성
+# Create S3 bucket
 resource "aws_s3_bucket" "terraform_state" {
   bucket        = var.bucket_name
   force_destroy = true
@@ -44,7 +44,7 @@ resource "aws_s3_bucket_public_access_block" "public_access" {
   restrict_public_buckets = true
 }
 
-# 잠금설정을 위한 다이나모DB 생성
+# Create dynamodb table for locking
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = var.table_name
   billing_mode = "PAY_PER_REQUEST"
