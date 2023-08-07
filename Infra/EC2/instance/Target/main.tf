@@ -2,7 +2,6 @@ resource "aws_instance" "project03-target-ec2" {
   ami           = data.aws_ami.ubuntu.image_id
   instance_type = "t2.micro"
   key_name      = var.key
-
   # Security group ( ssh, web )
   vpc_security_group_ids = [
     data.terraform_remote_state.project03_SG.outputs["project03-ssh"],

@@ -1,4 +1,3 @@
-
 resource "aws_instance" "project03-jenkins-ec2" {
   ami           = data.aws_ami.ubuntu.image_id
   instance_type = "t3.large"

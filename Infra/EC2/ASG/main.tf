@@ -8,7 +8,6 @@ resource "aws_autoscaling_group" "project03-GROUP" {
     data.terraform_remote_state.project03_VPC.outputs.private_subnet3a,
     data.terraform_remote_state.project03_VPC.outputs.private_subnet3c
   ]
-
   # lb target group connect
   target_group_arns = [data.terraform_remote_state.project03_lb_target.outputs.target_group_petclinic_arn]
   launch_template {

@@ -12,6 +12,7 @@ variable "remote_state_vpc" {
   description = "The key of the remote state file for the VPC in the S3 bucket."
   default     = "Infra/Network/VPC/terraform.tfstate"
 }
+
 variable "remote_state_ami" {
   description = "The key of the remote state file for the AMI in the S3 bucket."
   default     = "Infra/EC2/AMI/Target/terraform.tfstate"

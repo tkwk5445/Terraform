@@ -55,7 +55,6 @@ resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.project03-lb.arn
   port              = 80
   protocol          = "HTTP"
-
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.project03-target-group-petclinic.arn
@@ -68,7 +67,6 @@ resource "aws_lb_listener" "https" {
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
   certificate_arn   = var.https_listener_certificate_arn
-
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.project03-target-group-petclinic.arn
@@ -79,7 +77,6 @@ resource "aws_lb_listener" "web" {
   load_balancer_arn = aws_lb.project03-lb.arn
   port              = 8080
   protocol          = "HTTP"
-
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.project03-target-group-jenkins.arn
@@ -90,18 +87,15 @@ resource "aws_lb_listener" "web" {
 resource "aws_lb_listener_rule" "petclinic_rule1" {
   listener_arn = aws_lb_listener.http.arn
   priority     = 100
-
   condition {
     path_pattern {
       values = ["/petclinic*"]
     }
   }
-
   action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.project03-target-group-petclinic.arn
   }
-
   tags = {
     Name = "petclinic_rule"
   }
@@ -111,18 +105,15 @@ resource "aws_lb_listener_rule" "petclinic_rule1" {
 resource "aws_lb_listener_rule" "petclinic_rule2" {
   listener_arn = aws_lb_listener.https.arn
   priority     = 100
-
   condition {
     path_pattern {
       values = ["/petclinic*"]
     }
   }
-
   action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.project03-target-group-petclinic.arn
   }
-
   tags = {
     Name = "petclinic_rule"
   }
