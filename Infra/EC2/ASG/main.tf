@@ -5,8 +5,8 @@ resource "aws_autoscaling_group" "project03-GROUP" {
   min_size         = 3
   max_size         = 3
   vpc_zone_identifier = [
-    data.terraform_remote_state.project03_VPC.outputs.private_subnet3a,
-    data.terraform_remote_state.project03_VPC.outputs.private_subnet3c
+    data.terraform_remote_state.project03_VPC.outputs.private_subnet2a,
+    data.terraform_remote_state.project03_VPC.outputs.private_subnet2c
   ]
   # lb target group connect
   target_group_arns = [data.terraform_remote_state.project03_lb_target.outputs.target_group_petclinic_arn]
