@@ -17,7 +17,6 @@ resource "aws_instance" "project03-jenkins-ec2" {
               sudo apt update -y && sudo apt install -y zip
               cd /home/ubuntu && sudo git clone https://github.com/tkwk5445/jenkins_Scripts.git 
               cd jenkins_Scripts/ && sudo chmod u+x *.sh
-              sudo chmod u+x install-docker.sh
               sudo ./install-docker.sh && sudo ./install-docker-compose.sh && docker-compose up -d --build
               EOF
   tags = {
