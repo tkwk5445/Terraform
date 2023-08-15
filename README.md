@@ -1,1 +1,2 @@
-# Terraform Codes of CI/CD Project (8/1 ~ 8/21)
+# CI/CD Project with Iac (8/1 ~ 8/21)
+# Terraform Codes
