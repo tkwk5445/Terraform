@@ -1,2 +1,1 @@
-# CI/CD Project with Iac (8/1 ~ 8/21)
-# Terraform Codes
+# "Terraform Code for CI/CD Project Leveraging Infrastructure as Code (IaC)"
