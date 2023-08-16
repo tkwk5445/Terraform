@@ -31,13 +31,9 @@ output "target_group_jenkins_id" {
 # Listener
 output "aws_lb_listener_arn_HTTP" {
   value       = aws_lb_listener.http.arn
-  description = "The HTTP arn of the listener"
+  description = "The HTTP arn of the listener "
 }
 output "aws_lb_listener_arn_HTTPS" {
   value       = aws_lb_listener.https.arn
-  description = "The HTTPS arn of the listener"
-}
-output "aws_lb_listener_arn_WEB" {
-  value       = aws_lb_listener.web.arn
-  description = "The WEB arn of the listener"
+  description = "The HTTPS arn of the listener "
 }

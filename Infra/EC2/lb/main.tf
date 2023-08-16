@@ -50,17 +50,19 @@ resource "aws_lb" "project03-lb" {
   security_groups = [data.terraform_remote_state.project03_SG.outputs.project03-web]
 }
 
-# ALB listener
+# HTTP Listener 
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.project03-lb.arn
   port              = 80
   protocol          = "HTTP"
-  default_action {
+  
+    default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.project03-target-group-petclinic.arn
   }
 }
 
+# HTTPS Listener
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.project03-lb.arn
   port              = 443
@@ -73,12 +75,40 @@ resource "aws_lb_listener" "https" {
   }
 }
 
-resource "aws_lb_listener" "web" {
-  load_balancer_arn = aws_lb.project03-lb.arn
-  port              = 8080
-  protocol          = "HTTP"
-  default_action {
+# HTTPS Listener rule for jenkins
+resource "aws_lb_listener_rule" "https-jenkins" {
+  listener_arn = aws_lb_listener.https.arn
+  priority     = 100
+  action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.project03-target-group-jenkins.arn
+  }
+  condition {
+    host_header {
+      values = ["jenkins03.busanit-lab.com"]
+    
+    }
+  }
+  tags = {
+    Name        = "JenkinsRule"
+  }
+}
+
+# HTTPS Listener rule for petclinic
+resource "aws_lb_listener_rule" "https-petclinic" {
+  listener_arn = aws_lb_listener.https.arn
+  priority     = 101
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.project03-target-group-petclinic.arn
+  }
+  condition {
+    host_header {
+      values = ["petclinic03.busanit-lab.com"]
+    
+    }
+  }
+  tags = {
+    Name        = "PetclinicRule"
   }
 }
