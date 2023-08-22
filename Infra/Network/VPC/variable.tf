@@ -16,7 +16,7 @@ variable "private_subnet" {
 }
 
 variable "azs" {
-  description = "The available zone of ap-norheast-2"
+  description = "The available zone of ap-northeast-2"
   type        = list(string)
   default     = ["ap-northeast-2a", "ap-northeast-2c"]
 }
